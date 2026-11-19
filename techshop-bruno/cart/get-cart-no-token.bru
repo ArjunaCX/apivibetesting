@@ -1,0 +1,15 @@
+meta {
+  name: Get Cart No Token
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/cart
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 401
+}

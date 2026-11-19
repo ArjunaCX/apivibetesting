@@ -1,0 +1,21 @@
+meta {
+  name: Get Products Invalid Category
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/products?category=invalid-category
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 200
+}
+
+script:post-response {
+  const body = res.body;
+  expect(Array.isArray(body)).to.eql(true);
+  expect(body.length).to.eql(0);
+}

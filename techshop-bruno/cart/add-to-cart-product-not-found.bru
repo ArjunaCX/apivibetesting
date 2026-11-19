@@ -1,0 +1,30 @@
+meta {
+  name: Add To Cart Product Not Found
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/cart
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{authToken}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "productId": 99999,
+    "quantity": 1
+  }
+}
+
+assert {
+  res.status: eq 404
+}

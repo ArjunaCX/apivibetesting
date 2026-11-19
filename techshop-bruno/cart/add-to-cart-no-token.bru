@@ -1,0 +1,26 @@
+meta {
+  name: Add To Cart No Token
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/cart
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "productId": 1,
+    "quantity": 1
+  }
+}
+
+assert {
+  res.status: eq 401
+}

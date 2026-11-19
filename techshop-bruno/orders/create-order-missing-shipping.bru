@@ -1,0 +1,37 @@
+meta {
+  name: Create Order Missing Shipping
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/orders
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{authToken}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "items": [{ "productId": 1, "quantity": 1 }],
+    "shipping": {
+      "firstName": "Jane"
+    },
+    "payment": {
+      "cardNumber": "4111111111111111",
+      "expiryDate": "12/28",
+      "cvv": "123"
+    }
+  }
+}
+
+assert {
+  res.status: eq 400
+}

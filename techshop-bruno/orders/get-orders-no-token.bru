@@ -1,0 +1,15 @@
+meta {
+  name: Get Orders No Token
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/orders
+  body: none
+  auth: none
+}
+
+assert {
+  res.status: eq 401
+}

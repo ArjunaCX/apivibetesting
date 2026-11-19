@@ -1,0 +1,1480 @@
+{
+    "info":  {
+                 "_postman_id":  "ee4e6e30-91f9-453d-b528-15606167d984",
+                 "name":  "TechShop API Tests",
+                 "description":  "Generated from swagger.json + test-ideas.md for the Vibetesting course.",
+                 "schema":  "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+                 "createdAt":  "2026-11-18T15:58:15.000Z",
+                 "updatedAt":  "2026-11-19T10:51:45.000Z",
+                 "lastUpdatedBy":  "30311688",
+                 "uid":  "30311688-ee4e6e30-91f9-453d-b528-15606167d984"
+             },
+    "item":  [
+                 {
+                     "name":  "Auth",
+                     "item":  [
+                                  {
+                                      "name":  "Login — happy path",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 200\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(200);",
+                                                                                    "});",
+                                                                                    "const json = pm.response.json();",
+                                                                                    "pm.test(\u0027Response has token\u0027, function () {",
+                                                                                    "    pm.expect(json).to.have.property(\u0027token\u0027);",
+                                                                                    "});",
+                                                                                    "if (json.token) {",
+                                                                                    "    pm.collectionVariables.set(\u0027authToken\u0027, json.token);",
+                                                                                    "}"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "e4eb5c49-cb92-4009-8303-bac736f64a3a",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"email\": \"demo@techshop.com\",\n  \"password\": \"password123\"\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/auth/login",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "auth",
+                                                                               "login"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-e4eb5c49-cb92-4009-8303-bac736f64a3a"
+                                  },
+                                  {
+                                      "name":  "Login — wrong password",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 401\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(401);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "630d1bbe-692c-429a-9fca-156aaae08488",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"email\": \"demo@techshop.com\",\n  \"password\": \"wrongpassword\"\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/auth/login",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "auth",
+                                                                               "login"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-630d1bbe-692c-429a-9fca-156aaae08488"
+                                  },
+                                  {
+                                      "name":  "Login — missing email",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 400\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(400);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "9bc5c328-9e63-4c50-8ce9-a2b769a2c869",
+                                      "request":  {
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"password\": \"password123\"\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/auth/login",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "auth",
+                                                                               "login"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-9bc5c328-9e63-4c50-8ce9-a2b769a2c869"
+                                  }
+                              ],
+                     "id":  "1681e794-6ec7-42fd-b97d-60aca5541d1e",
+                     "createdAt":  "2026-11-18T15:58:15.000Z",
+                     "updatedAt":  "2026-11-18T15:58:15.000Z",
+                     "uid":  "30311688-1681e794-6ec7-42fd-b97d-60aca5541d1e"
+                 },
+                 {
+                     "name":  "Products",
+                     "item":  [
+                                  {
+                                      "name":  "Get all products — happy path",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 200\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(200);",
+                                                                                    "});",
+                                                                                    "pm.test(\u0027Body is an array\u0027, function () {",
+                                                                                    "    pm.expect(pm.response.json()).to.be.an(\u0027array\u0027);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "46cdaa30-9fec-46bc-9b19-fbdfba130e52",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/products",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "products"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-46cdaa30-9fec-46bc-9b19-fbdfba130e52"
+                                  },
+                                  {
+                                      "name":  "Get products — invalid category",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 200\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(200);",
+                                                                                    "});",
+                                                                                    "pm.test(\u0027Body is an empty array\u0027, function () {",
+                                                                                    "    pm.expect(pm.response.json()).to.be.an(\u0027array\u0027).that.is.empty;",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "a6ebbd0b-1f90-4e29-8217-da62c3a16406",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/products?category=invalid-category",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "products"
+                                                                           ],
+                                                                  "query":  [
+                                                                                {
+                                                                                    "key":  "category",
+                                                                                    "value":  "invalid-category"
+                                                                                }
+                                                                            ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-a6ebbd0b-1f90-4e29-8217-da62c3a16406"
+                                  },
+                                  {
+                                      "name":  "Get product by id — happy path",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 200\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(200);",
+                                                                                    "});",
+                                                                                    "pm.test(\u0027Response has product id\u0027, function () {",
+                                                                                    "    pm.expect(pm.response.json()).to.have.property(\u0027id\u0027);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "480b11b1-d421-446b-b54a-ca75f88eb001",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/products/1",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "products",
+                                                                               "1"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-480b11b1-d421-446b-b54a-ca75f88eb001"
+                                  },
+                                  {
+                                      "name":  "Get product by id — not found",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 404\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(404);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "2094a70d-e005-45d5-951f-9d532da1623d",
+                                      "request":  {
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/products/999",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "products",
+                                                                               "999"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-2094a70d-e005-45d5-951f-9d532da1623d"
+                                  }
+                              ],
+                     "id":  "762e6a1d-de5d-4470-afd0-f516c083caa3",
+                     "createdAt":  "2026-11-18T15:58:15.000Z",
+                     "updatedAt":  "2026-11-18T15:58:15.000Z",
+                     "uid":  "30311688-762e6a1d-de5d-4470-afd0-f516c083caa3"
+                 },
+                 {
+                     "name":  "Cart",
+                     "item":  [
+                                  {
+                                      "name":  "Get cart — happy path",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 200\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(200);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "b796e4c8-a74c-430b-a2a7-e1c076731e7f",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "bearer",
+                                                                   "bearer":  [
+                                                                                  {
+                                                                                      "key":  "token",
+                                                                                      "value":  "{{authToken}}",
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                              ]
+                                                               },
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/cart",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "cart"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-b796e4c8-a74c-430b-a2a7-e1c076731e7f"
+                                  },
+                                  {
+                                      "name":  "Get cart — no token",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 401\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(401);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "756b0fd2-b5e1-49e4-b786-d00612091861",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "noauth"
+                                                               },
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/cart",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "cart"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-756b0fd2-b5e1-49e4-b786-d00612091861"
+                                  },
+                                  {
+                                      "name":  "Add to cart — happy path",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 201\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(201);",
+                                                                                    "});",
+                                                                                    "const json = pm.response.json();",
+                                                                                    "if (json \u0026\u0026 json.items \u0026\u0026 json.items.length) {",
+                                                                                    "    pm.collectionVariables.set(\u0027cartItemId\u0027, String(json.items[json.items.length - 1].id));",
+                                                                                    "} else if (json \u0026\u0026 json.id) {",
+                                                                                    "    pm.collectionVariables.set(\u0027cartItemId\u0027, String(json.id));",
+                                                                                    "}"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "e3e4ec32-378c-441e-8d87-f3f250ed0a43",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "bearer",
+                                                                   "bearer":  [
+                                                                                  {
+                                                                                      "key":  "token",
+                                                                                      "value":  "{{authToken}}",
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                              ]
+                                                               },
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"productId\": 1,\n  \"quantity\": 2\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/cart",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "cart"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-e3e4ec32-378c-441e-8d87-f3f250ed0a43"
+                                  },
+                                  {
+                                      "name":  "Add to cart — quantity less than 1",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 400\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(400);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "ab5f4e68-ff9d-47f9-8888-259ba4fdc722",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "bearer",
+                                                                   "bearer":  [
+                                                                                  {
+                                                                                      "key":  "token",
+                                                                                      "value":  "{{authToken}}",
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                              ]
+                                                               },
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"productId\": 1,\n  \"quantity\": 0\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/cart",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "cart"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-ab5f4e68-ff9d-47f9-8888-259ba4fdc722"
+                                  },
+                                  {
+                                      "name":  "Add to cart — no token",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 401\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(401);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "f2f18826-5c8a-4fb5-adfa-c8c1f2103155",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "noauth"
+                                                               },
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"productId\": 1,\n  \"quantity\": 1\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/cart",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "cart"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-f2f18826-5c8a-4fb5-adfa-c8c1f2103155"
+                                  },
+                                  {
+                                      "name":  "Add to cart — product not found",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 404\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(404);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "b4b8b756-9c15-4c8b-abca-27b4e00e3ff7",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "bearer",
+                                                                   "bearer":  [
+                                                                                  {
+                                                                                      "key":  "token",
+                                                                                      "value":  "{{authToken}}",
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                              ]
+                                                               },
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"productId\": 99999,\n  \"quantity\": 1\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/cart",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "cart"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-b4b8b756-9c15-4c8b-abca-27b4e00e3ff7"
+                                  },
+                                  {
+                                      "name":  "Update cart item — happy path",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 200\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(200);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "6f3176c4-8a79-4b8f-8102-b66693afd6bf",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "bearer",
+                                                                   "bearer":  [
+                                                                                  {
+                                                                                      "key":  "token",
+                                                                                      "value":  "{{authToken}}",
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                              ]
+                                                               },
+                                                      "method":  "PUT",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"quantity\": 3\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/cart/{{cartItemId}}",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "cart",
+                                                                               "{{cartItemId}}"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-6f3176c4-8a79-4b8f-8102-b66693afd6bf"
+                                  },
+                                  {
+                                      "name":  "Update cart item — invalid quantity",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 400\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(400);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "f00f2a3f-6632-48ac-9a7c-cba78a9d5054",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "bearer",
+                                                                   "bearer":  [
+                                                                                  {
+                                                                                      "key":  "token",
+                                                                                      "value":  "{{authToken}}",
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                              ]
+                                                               },
+                                                      "method":  "PUT",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"quantity\": 0\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/cart/{{cartItemId}}",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "cart",
+                                                                               "{{cartItemId}}"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-f00f2a3f-6632-48ac-9a7c-cba78a9d5054"
+                                  },
+                                  {
+                                      "name":  "Update cart item — not found",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 404\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(404);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "29d4d041-984f-47d5-bd59-7f5bb67e6eee",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "bearer",
+                                                                   "bearer":  [
+                                                                                  {
+                                                                                      "key":  "token",
+                                                                                      "value":  "{{authToken}}",
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                              ]
+                                                               },
+                                                      "method":  "PUT",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"quantity\": 2\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/cart/99999",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "cart",
+                                                                               "99999"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-29d4d041-984f-47d5-bd59-7f5bb67e6eee"
+                                  },
+                                  {
+                                      "name":  "Update cart item — no token",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 401\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(401);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "46c3e06e-c530-4b1d-bf56-e186a26163c1",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "noauth"
+                                                               },
+                                                      "method":  "PUT",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"quantity\": 2\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/cart/1",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "cart",
+                                                                               "1"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-46c3e06e-c530-4b1d-bf56-e186a26163c1"
+                                  },
+                                  {
+                                      "name":  "Delete cart item — happy path",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 200\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(200);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "36b7e605-80a1-47be-ab32-1793f4bec689",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "bearer",
+                                                                   "bearer":  [
+                                                                                  {
+                                                                                      "key":  "token",
+                                                                                      "value":  "{{authToken}}",
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                              ]
+                                                               },
+                                                      "method":  "DELETE",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/cart/{{cartItemId}}",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "cart",
+                                                                               "{{cartItemId}}"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-36b7e605-80a1-47be-ab32-1793f4bec689"
+                                  },
+                                  {
+                                      "name":  "Delete cart item — no token",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 401\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(401);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "bd23a7ed-3248-4bb2-9c6c-6b2a09b1bf0e",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "noauth"
+                                                               },
+                                                      "method":  "DELETE",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/cart/1",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "cart",
+                                                                               "1"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-bd23a7ed-3248-4bb2-9c6c-6b2a09b1bf0e"
+                                  },
+                                  {
+                                      "name":  "Delete cart item — not found",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 404\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(404);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "68e45986-8689-473b-8836-4a1ce6559a91",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "bearer",
+                                                                   "bearer":  [
+                                                                                  {
+                                                                                      "key":  "token",
+                                                                                      "value":  "{{authToken}}",
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                              ]
+                                                               },
+                                                      "method":  "DELETE",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/cart/99999",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "cart",
+                                                                               "99999"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-68e45986-8689-473b-8836-4a1ce6559a91"
+                                  }
+                              ],
+                     "id":  "74a68dce-5511-48c1-ad29-1be7c550304c",
+                     "createdAt":  "2026-11-18T15:58:15.000Z",
+                     "updatedAt":  "2026-11-18T15:58:15.000Z",
+                     "uid":  "30311688-74a68dce-5511-48c1-ad29-1be7c550304c"
+                 },
+                 {
+                     "name":  "Orders",
+                     "item":  [
+                                  {
+                                      "name":  "Get orders — happy path",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 200\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(200);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "b3e16cdc-fa49-45db-ba2f-da3ecf59a42d",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "bearer",
+                                                                   "bearer":  [
+                                                                                  {
+                                                                                      "key":  "token",
+                                                                                      "value":  "{{authToken}}",
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                              ]
+                                                               },
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/orders",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "orders"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-b3e16cdc-fa49-45db-ba2f-da3ecf59a42d"
+                                  },
+                                  {
+                                      "name":  "Get orders — no token",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 401\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(401);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "c1152c25-7207-4ee3-9f40-97f2377418ba",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "noauth"
+                                                               },
+                                                      "method":  "GET",
+                                                      "header":  [
+
+                                                                 ],
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/orders",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "orders"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-c1152c25-7207-4ee3-9f40-97f2377418ba"
+                                  },
+                                  {
+                                      "name":  "Place order — happy path",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 201\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(201);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "5cf55b10-ba12-496d-b796-5441d46556fa",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "bearer",
+                                                                   "bearer":  [
+                                                                                  {
+                                                                                      "key":  "token",
+                                                                                      "value":  "{{authToken}}",
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                              ]
+                                                               },
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"items\": [{ \"productId\": 1, \"quantity\": 1 }],\n  \"shipping\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@example.com\",\n    \"phone\": \"0412345678\"\n  },\n  \"payment\": {\n    \"cardNumber\": \"4111111111111111\",\n    \"expiryDate\": \"12/28\",\n    \"cvv\": \"123\"\n  }\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/orders",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "orders"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-5cf55b10-ba12-496d-b796-5441d46556fa"
+                                  },
+                                  {
+                                      "name":  "Place order — expired card",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 400\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(400);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "f090e33a-3357-4811-b92e-57f4c325cd19",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "bearer",
+                                                                   "bearer":  [
+                                                                                  {
+                                                                                      "key":  "token",
+                                                                                      "value":  "{{authToken}}",
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                              ]
+                                                               },
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"items\": [{ \"productId\": 1, \"quantity\": 1 }],\n  \"shipping\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@example.com\",\n    \"phone\": \"0412345678\"\n  },\n  \"payment\": {\n    \"cardNumber\": \"4111111111111111\",\n    \"expiryDate\": \"01/20\",\n    \"cvv\": \"123\"\n  }\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/orders",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "orders"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-f090e33a-3357-4811-b92e-57f4c325cd19"
+                                  },
+                                  {
+                                      "name":  "Place order — invalid card number",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 400\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(400);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "e0b6ee30-3054-4c49-bf70-4ddcc05b057f",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "bearer",
+                                                                   "bearer":  [
+                                                                                  {
+                                                                                      "key":  "token",
+                                                                                      "value":  "{{authToken}}",
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                              ]
+                                                               },
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"items\": [{ \"productId\": 1, \"quantity\": 1 }],\n  \"shipping\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@example.com\",\n    \"phone\": \"0412345678\"\n  },\n  \"payment\": {\n    \"cardNumber\": \"4111\",\n    \"expiryDate\": \"12/28\",\n    \"cvv\": \"123\"\n  }\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/orders",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "orders"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-e0b6ee30-3054-4c49-bf70-4ddcc05b057f"
+                                  },
+                                  {
+                                      "name":  "Place order — missing shipping fields",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 400\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(400);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "2245dca8-e724-493a-8e68-762c4a51b1d3",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "bearer",
+                                                                   "bearer":  [
+                                                                                  {
+                                                                                      "key":  "token",
+                                                                                      "value":  "{{authToken}}",
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                              ]
+                                                               },
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"items\": [{ \"productId\": 1, \"quantity\": 1 }],\n  \"shipping\": {\n    \"firstName\": \"Jane\"\n  },\n  \"payment\": {\n    \"cardNumber\": \"4111111111111111\",\n    \"expiryDate\": \"12/28\",\n    \"cvv\": \"123\"\n  }\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/orders",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "orders"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-2245dca8-e724-493a-8e68-762c4a51b1d3"
+                                  },
+                                  {
+                                      "name":  "Place order — no token",
+                                      "event":  [
+                                                    {
+                                                        "listen":  "test",
+                                                        "script":  {
+                                                                       "type":  "text/javascript",
+                                                                       "exec":  [
+                                                                                    "pm.test(\u0027Status code is 401\u0027, function () {",
+                                                                                    "    pm.response.to.have.status(401);",
+                                                                                    "});"
+                                                                                ]
+                                                                   }
+                                                    }
+                                                ],
+                                      "id":  "d9e656d1-8953-4f38-89a8-0323ba1ddd23",
+                                      "request":  {
+                                                      "auth":  {
+                                                                   "type":  "noauth"
+                                                               },
+                                                      "method":  "POST",
+                                                      "header":  [
+                                                                     {
+                                                                         "key":  "Content-Type",
+                                                                         "value":  "application/json"
+                                                                     }
+                                                                 ],
+                                                      "body":  {
+                                                                   "mode":  "raw",
+                                                                   "raw":  "{\n  \"items\": [{ \"productId\": 1, \"quantity\": 1 }],\n  \"shipping\": {\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@example.com\",\n    \"phone\": \"0412345678\"\n  },\n  \"payment\": {\n    \"cardNumber\": \"4111111111111111\",\n    \"expiryDate\": \"12/28\",\n    \"cvv\": \"123\"\n  }\n}",
+                                                                   "options":  {
+                                                                                   "raw":  {
+                                                                                               "language":  "json"
+                                                                                           }
+                                                                               }
+                                                               },
+                                                      "url":  {
+                                                                  "raw":  "{{base_url}}/orders",
+                                                                  "host":  [
+                                                                               "{{base_url}}"
+                                                                           ],
+                                                                  "path":  [
+                                                                               "orders"
+                                                                           ]
+                                                              }
+                                                  },
+                                      "response":  [
+
+                                                   ],
+                                      "createdAt":  "2026-11-18T15:58:15.000Z",
+                                      "updatedAt":  "2026-11-18T15:58:15.000Z",
+                                      "uid":  "30311688-d9e656d1-8953-4f38-89a8-0323ba1ddd23"
+                                  }
+                              ],
+                     "id":  "775d4420-fe43-48a9-99e2-5c5b67482764",
+                     "createdAt":  "2026-11-18T15:58:15.000Z",
+                     "updatedAt":  "2026-11-18T15:58:15.000Z",
+                     "uid":  "30311688-775d4420-fe43-48a9-99e2-5c5b67482764"
+                 }
+             ],
+    "variable":  [
+                     {
+                         "key":  "base_url",
+                         "value":  "http://localhost:3000"
+                     },
+                     {
+                         "key":  "authToken",
+                         "value":  ""
+                     },
+                     {
+                         "key":  "cartItemId",
+                         "value":  "1"
+                     }
+                 ]
+}

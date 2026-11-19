@@ -1,0 +1,36 @@
+meta {
+  name: Create Order No Token
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{baseUrl}}/orders
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "items": [{ "productId": 1, "quantity": 1 }],
+    "shipping": {
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "email": "jane@example.com",
+      "phone": "0412345678"
+    },
+    "payment": {
+      "cardNumber": "4111111111111111",
+      "expiryDate": "12/28",
+      "cvv": "123"
+    }
+  }
+}
+
+assert {
+  res.status: eq 401
+}

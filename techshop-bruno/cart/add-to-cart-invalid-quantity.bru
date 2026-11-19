@@ -1,0 +1,30 @@
+meta {
+  name: Add To Cart Invalid Quantity
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/cart
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{authToken}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "productId": 1,
+    "quantity": 0
+  }
+}
+
+assert {
+  res.status: eq 400
+}

@@ -1,0 +1,40 @@
+meta {
+  name: Create Order Expired Card
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/orders
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{authToken}}
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "items": [{ "productId": 1, "quantity": 1 }],
+    "shipping": {
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "email": "jane@example.com",
+      "phone": "0412345678"
+    },
+    "payment": {
+      "cardNumber": "4111111111111111",
+      "expiryDate": "01/20",
+      "cvv": "123"
+    }
+  }
+}
+
+assert {
+  res.status: eq 400
+}
